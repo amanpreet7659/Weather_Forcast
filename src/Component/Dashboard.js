@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchApi } from '../Action/WeatherFunction';
+import Clouds from './Clouds';
 
 const Dashboard = () => {
     // const dispatch=useDispatch();
@@ -18,6 +19,7 @@ const Dashboard = () => {
             <br></br>          
             <br></br>          
             <input type="button" value="Submit" onClick={handleSubmit}/>  
+        <Clouds city={city}/>
         </div>
     )
 }
