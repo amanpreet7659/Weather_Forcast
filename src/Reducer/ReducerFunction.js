@@ -1,11 +1,13 @@
 import moment from "moment"
-import { FETCH_API, PER_DAY } from "../Store/Events"
+import { CURRENT_POSITION, FETCH_API, PER_DAY } from "../Store/Events"
 
 const initialstate = {
     Wether: "",
     City: "",
     PWether: "",
-    city: ""
+    city: "",
+    location: "",
+    date:""
 }
 
 const ReducerFunction = (state = initialstate, action) => {
@@ -30,35 +32,33 @@ const ReducerFunction = (state = initialstate, action) => {
                 date = moment(date).format('YYYY-M-D')
                 console.log(date);
                 let comp;
-                let filtered=[];
+                let filtered = [];
                 let data = list.filter((i, j) => {
                     comp = i.dt_txt
                     comp = moment(comp).format('YYYY-M-D')
                     // console.log(comp);
-                    
+
                     if (comp === date) {
-                        // filtered.push(i)
                         return ({
                             ...state,
                             PWether: i,
-                            city: action.city
+                            city: action.city,
+                            date:date
                         })
-                        // console.log(i, j);
-                        // debugger
                     }
-                    // debugger
-                    // return ({
-                    //     ...state,
-                    //     PWether: filtered,
-                    //     city: action.city
-                    // })
                 })
                 return ({
                     ...state,
                     PWether: data,
                     city: action.city
                 })
-                console.log('data',data)
+            }
+        case CURRENT_POSITION:
+            {
+                return ({
+                    ...state,
+                    location: action.payload,
+                })
             }
         default:
             return state

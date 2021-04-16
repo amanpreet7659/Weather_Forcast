@@ -2,7 +2,7 @@ import { Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow }
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchApi, perDay } from '../Action/WeatherFunction';
+import { fetchApi, getLocation, perDay } from '../Action/WeatherFunction';
 
 const Clouds = (props) => {
 
@@ -10,7 +10,8 @@ const Clouds = (props) => {
     const data = useSelector(state => state.Wether_Data.Wether.list);
     const city = useSelector(state => state.Wether_Data.City)
     const filterData = useSelector(state => state.Wether_Data.PWether)
-    console.log("filterData ", filterData);
+    const current = useSelector(state => state.Wether_Data.location.city)
+    console.log("current ", current);
     const [dayData, setdayData] = useState([]);
     const [date, setDate] = useState([])
     const [ttime, setTtime] = useState([])
@@ -35,7 +36,8 @@ const Clouds = (props) => {
     // console.log(time + "03:00:00");
 
     useEffect(() => {
-        dispatch(fetchApi("Mohali"))
+        dispatch(fetchApi(current))
+        dispatch(getLocation())
     }, [])
     useEffect(() => {
         data && setdayData(data.map((i) => { return moment(i.dt_txt).format('dddd') }))
@@ -62,7 +64,7 @@ const Clouds = (props) => {
             <div><TableContainer>
                 <Table>
                     <TableHead>
-                        <TableRow>{fil.map((i) => { return <TableCell style={{fontWeight:"bold"}}>{i}</TableCell> })}
+                        <TableRow>{fil.map((i) => { return <TableCell style={{ fontWeight: "bold" }}>{i}</TableCell> })}
                         </TableRow>
                         <TableRow>{datee.map((i) => {
                             return <TableCell>{i}</TableCell>
@@ -79,30 +81,42 @@ const Clouds = (props) => {
                                         hrs.push(i.main.temp)
                                         {/* console.log("hjhjhjhjhjjh", i.dt_txt) */ }
                                         let d;
+                                        let v;
                                         let tem;
+                                        console.log('kkkkkk', o)
+                                        if (o == "few clouds") {
+                                            d = 'Few Clouds'
+                                            tem = i.main.temp;
+                                            d = 'https://www.clipartmax.com/png/middle/163-1632248_gnome-weather-few-clouds-scattered-clouds-weather-symbol.png'
+                                        }
                                         if (o == "scattered clouds") {
                                             d = 'https://en.protothema.gr/wp-content/uploads/2014/11/clouds_10_5_6_tonemapped-870x418.jpg'
                                             tem = i.main.temp;
+                                            v = "Scattered Clouds"
                                         }
                                         else if (o == "light rain") {
                                             d = 'https://images.blogthings.com/whatsyouridealweatherquiz/light-rain.png'
                                             tem = i.main.temp;
+                                            v = "Light Rain"
                                         }
                                         else if (o == "clear sky") {
                                             tem = i.main.temp;
+                                            v = "Clear Sky"
                                             d = 'https://thumbs.dreamstime.com/b/clear-sky-sun-sunrays-daytime-good-weather-138115265.jpg'
                                         }
                                         else if (o == "broken clouds") {
                                             tem = i.main.temp;
+                                            v = "Broken Clouds"
                                             d = 'https://cdn3.iconfinder.com/data/icons/stylized-weather-icons/745/803BrokenClouds.png'
                                         }
                                         else if (o == 'overcast clouds') {
                                             tem = i.main.temp;
+                                            v = 'Overcast Clouds'
                                             d = 'https://ak.picdn.net/shutterstock/videos/3803567/thumb/3.jpg'
                                         }
                                         tempD = tempDate;
                                         tem = tem - 273.15;
-                                        return <><TableCell><img className="images" onClick={() => handleClick(city, j)} src={d}></img><label><b>Temp</b> {tem.toFixed(2)} C</label></TableCell></>
+                                        return <><TableCell><img className="images" onClick={() => handleClick(city, j)} src={d} alt={v} title={v}></img><label><b>Temp</b> {tem.toFixed(2)} C</label></TableCell></>
                                     }
                                 }
                             })}
@@ -112,14 +126,14 @@ const Clouds = (props) => {
             </TableContainer>
             </div>
             <div>
-                <h2 className="head">Per Day data</h2>
+                <h2 className="head">Per Day data { }</h2>
                 <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow >
-                                <TableCell style={{fontWeight:"bold"}}>Hours</TableCell>
-                                <TableCell style={{fontWeight:"bold"}}>Tem</TableCell>
-                                <TableCell style={{fontWeight:"bold"}}>Clouds</TableCell>
+                                <TableCell style={{ fontWeight: "bold" }}>Hours</TableCell>
+                                <TableCell style={{ fontWeight: "bold" }}>Tem</TableCell>
+                                <TableCell style={{ fontWeight: "bold" }}>Clouds</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

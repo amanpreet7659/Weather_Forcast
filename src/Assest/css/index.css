@@ -1,9 +1,11 @@
 .images {
   width        : 90px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .NavBar {
+  padding: 10px;
   grid-template-columns: auto auto auto auto auto;
   display              : grid;
   width                : 100%;
@@ -13,8 +15,8 @@
 }
 
 .head {
-  margin   : auto;
-  font-size: 30px;
+  margin     : auto;
+  font-size  : 30px;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -62,7 +64,26 @@
   font-family: 'Times New Roman', Times, serif !important;
 }
 
-.MuiTableCell-root
-{
+.MuiTableCell-root {
   padding: 10px !important;
+}
+
+.background {
+  position             : absolute;
+  background           : url(https://toppng.com/uploads/preview/weather-forecast-weather-icon-11549807158l6mtyabivc.png);
+  background-position  : center;
+  background-repeat    : no-repeat;
+  background-size      : cover;
+  width                : 100%;
+  height               : 105%;
+  z-index              : -1;
+  background-attachment: fixed;
+  opacity              : 0.3;
+}
+
+b{
+  font-family: 'Times New Roman', Times, serif;
+}
+label{
+    font-family: 'Times New Roman', Times, serif;
 }

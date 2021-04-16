@@ -14,12 +14,18 @@ const Dashboard = () => {
     const handleInput = (e) => {
         setcity(e.target.value)
     }
+    const handleKeyPress = (e) => {
+        if (e.charCode == 13) {
+            dispatch(fetchApi(city));
+        }
+        else return
+    }
     return (
         <div >
             <div className="NavBar">
 
                 <h3 className="head">Weather App</h3>
-                <input className="inputbar" type="text" placeholder="Enter City Name" onChange={handleInput} />
+                <input className="inputbar" onKeyPress={handleKeyPress} type="text" placeholder="Enter City Name" onChange={handleInput} />
                 <br></br>
                 <br></br>
                 <input className="inputbtn" type="button" value="Submit" onClick={handleSubmit} />

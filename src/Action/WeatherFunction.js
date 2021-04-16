@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_API, PER_DAY } from "../Store/Events"
+import { CURRENT_POSITION, FETCH_API, PER_DAY } from "../Store/Events"
 
 export const fetchApi = (city) => dispatch => {
     axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=69ea186130e1fec118fcc795ac180f7e
@@ -21,8 +21,6 @@ export const fetchApi = (city) => dispatch => {
 
 export const perDay = (city, j) => dispatch => {
     axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=69ea186130e1fec118fcc795ac180f7e`)
-    // axios.get(`api.openweathermap.org/data/2.5/forecast/daily?q=${city}&mode=xml&units=metric&cnt=7&appid=50c9fad5c18d620ce1212e9ea4e1177d`)
-    // axios.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&mode=xml&units=metric&cnt=16")`)
         .then(res => {
             dispatch({
                 type: PER_DAY,
@@ -37,4 +35,27 @@ export const perDay = (city, j) => dispatch => {
                 payload: { data: false, err }
             })
         })
+}
+
+export const getLocation = () => dispatch => {
+    axios.get("https://ipapi.co/json/")
+        .then(res => {
+            dispatch({
+                type: CURRENT_POSITION,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: CURRENT_POSITION,
+                payload: { data: false, err }
+            })
+        })
+    //     .then((response) => {
+    //         // let data = response.data;
+    //         // setSearch(data.city);
+    //         type:   
+    //     })
+    //     .catch((error) => {
+    //     });
 }
