@@ -2,8 +2,7 @@ import axios from "axios"
 import { CURRENT_POSITION, FETCH_API, PER_DAY } from "../Store/Events"
 
 export const fetchApi = (city) => dispatch => {
-    axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=69ea186130e1fec118fcc795ac180f7e
-    `)
+    axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=69ea186130e1fec118fcc795ac180f7e`)
         .then(res => {
             dispatch({
                 type: FETCH_API,
@@ -51,11 +50,4 @@ export const getLocation = () => dispatch => {
                 payload: { data: false, err }
             })
         })
-    //     .then((response) => {
-    //         // let data = response.data;
-    //         // setSearch(data.city);
-    //         type:   
-    //     })
-    //     .catch((error) => {
-    //     });
 }

@@ -23,20 +23,15 @@ const ReducerFunction = (state = initialstate, action) => {
             }
         case PER_DAY:
             {
-
                 let list = action.payload.list
                 let city = action.city
                 let index = action.index
-                console.log(list, index, city);
                 let date = list[index].dt_txt
                 date = moment(date).format('YYYY-M-D')
-                console.log(date);
-                let comp;
-                let filtered = [];
+                let comp;let filtered = [];
                 let data = list.filter((i, j) => {
                     comp = i.dt_txt
                     comp = moment(comp).format('YYYY-M-D')
-                    // console.log(comp);
 
                     if (comp === date) {
                         return ({

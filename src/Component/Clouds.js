@@ -5,36 +5,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchApi, getLocation, perDay } from '../Action/WeatherFunction';
 
 const Clouds = (props) => {
-
-    const [Dweather, setDweather] = useState();
     const data = useSelector(state => state.Wether_Data.Wether.list);
     const city = useSelector(state => state.Wether_Data.City)
     const filterData = useSelector(state => state.Wether_Data.PWether)
     const current = useSelector(state => state.Wether_Data.location.city)
-    console.log("current ", current);
+    const [Dweather, setDweather] = useState();
     const [dayData, setdayData] = useState([]);
     const [date, setDate] = useState([])
     const [ttime, setTtime] = useState([])
     let [compDate, setCompDate] = useState([]);
     const [weather, setWeather] = useState([]);
     const dispatch = useDispatch();
-    // const city=useSelector(state=>state)
     let imgData = ""
-    // console.log("state ",city);
     let tempD = 'tempDate'
-    let fil = [];
-    let datee = [];
-    let desc = [];
+    let fil = []; let datee = []; let desc = [];
     desc = weather.map((i, j) => { return i.description })
     fil = dayData.filter((i, j) => {
         return dayData.indexOf(i) == j
     })
     let time = new Date().toLocaleTimeString();
     time = moment(time, 'hh').format('YYYY-MM-D ')
-    // time.toLowerCase();
     datee = date.filter((i, j) => { return date.indexOf(i) == j })
-    // console.log(time + "03:00:00");
-
     useEffect(() => {
         dispatch(fetchApi(current))
         dispatch(getLocation())
@@ -49,14 +40,8 @@ const Clouds = (props) => {
         }))
         data && setCompDate(data.map((i) => { return moment(i.dt_txt).format('YYYY-D-MM') }))
     }, [data])
-
-    // console.log(time);
-    // console.log(ttime);
-    let hrs = [];
-    let k;
-
+    let hrs = []; let k;
     const handleClick = (city, j) => {
-        // alert("clicked")
         dispatch(perDay(city, j))
     }
     return (
@@ -79,11 +64,7 @@ const Clouds = (props) => {
                                     o = i.weather[0].description
                                     if (tempD != tempDate) {
                                         hrs.push(i.main.temp)
-                                        {/* console.log("hjhjhjhjhjjh", i.dt_txt) */ }
-                                        let d;
-                                        let v;
-                                        let tem;
-                                        console.log('kkkkkk', o)
+                                        let d; let v; let tem;
                                         if (o == "few clouds") {
                                             d = 'Few Clouds'
                                             tem = i.main.temp;
@@ -145,10 +126,8 @@ const Clouds = (props) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-
             </div>
         </div>
     )
 }
-
 export default Clouds

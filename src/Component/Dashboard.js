@@ -4,7 +4,6 @@ import { fetchApi } from '../Action/WeatherFunction';
 import Clouds from './Clouds';
 
 const Dashboard = () => {
-    // const dispatch=useDispatch();
     const City = useSelector(state => state.Wether_Data.City)
     const dispatch = useDispatch();
     const [city, setcity] = useState()
@@ -23,7 +22,6 @@ const Dashboard = () => {
     return (
         <div >
             <div className="NavBar">
-
                 <h3 className="head">Weather App</h3>
                 <input className="inputbar" onKeyPress={handleKeyPress} type="text" placeholder="Enter City Name" onChange={handleInput} />
                 <br></br>
