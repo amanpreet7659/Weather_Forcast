@@ -57,7 +57,7 @@ const Clouds = (props) => {
                     </TableHead>
                     <TableBody>
                         <TableRow>
-                            {data && data.map((i, j) => {
+                            {data ? data.map((i, j) => {
                                 let tempDate = moment(i.dt_txt).format('YYYY-M-D')
                                 let o = ""
                                 if (toString(tempDate) === toString(time)) {
@@ -100,7 +100,7 @@ const Clouds = (props) => {
                                         return <><TableCell><img className="images" onClick={() => handleClick(city, j)} src={d} alt={v} title={v}></img><label><b>Temp</b> {tem.toFixed(2)} C</label></TableCell></>
                                     }
                                 }
-                            })}
+                            }):<div><h3 className="NORECORD">No Record Found</h3></div>}
                         </TableRow>
                     </TableBody>
                 </Table>

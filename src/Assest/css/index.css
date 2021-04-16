@@ -1,11 +1,11 @@
 .images {
   width        : 90px;
   border-radius: 10px;
-  cursor: pointer;
+  cursor       : pointer;
 }
 
 .NavBar {
-  padding: 10px;
+  padding              : 10px;
   grid-template-columns: auto auto auto auto auto;
   display              : grid;
   width                : 100%;
@@ -81,9 +81,17 @@
   opacity              : 0.3;
 }
 
-b{
+b {
   font-family: 'Times New Roman', Times, serif;
 }
-label{
-    font-family: 'Times New Roman', Times, serif;
+
+label {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.NORECORD {
+  margin     : auto;
+  text-align : center;
+  font-family: time;
+  font-size  : 50px;
 }
